@@ -1,29 +1,57 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <div id="app" class="app">
+    <div class="container">
+      <!-- <div id="nav">
+        <router-link to="/">Todo</router-link> |
+        <router-link to="/about">About</router-link>
+      </div> -->
+      <router-view/>
     </div>
-    <router-view/>
   </div>
 </template>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+html,
+body{
+  height: 100%;
+}
+html{
+  font-size: 62.5%;
+  font-size: .625em;
+}
+body{
+  font-family: 'Open Sans', verdana, arial, sans-serif;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 1.4em;
+}
+ul{
+  list-style: none;
+}
+a{
+  text-decoration: none;
+}
+.app{
+  text-align: center;
+  background-color: #47b784;
+    background: linear-gradient(145deg,#59e0a2,#47b784);
+  display: flex;
+  padding: 10px;
+  min-height: 100%;
+}
+.container{
+  width: 100%;
+  max-width: 480px;
+  padding: 40px;
+  background: #fff;
+  border-radius: 6px;
+  margin: auto;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, .3);
 }
 </style>
