@@ -17,6 +17,9 @@
         </svg>
       </a>
     </li>
+    <li class="list__todo todo" v-if="todosLength <= 0">
+      <span class="todo__text">Vous n'avez aucune todo pour l'instant.</span>
+    </li>
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display: none;">
       <symbol id="delete" viewBox="0 0 512 512">
         <path d="M464.71,137.981l-15.936-59.92c-1.519-5.717-6.712-9.709-12.628-9.709H332.769C329.818,30.171,297.829,0,258.905,0h-5.809
@@ -69,6 +72,9 @@ export default {
   computed: {
     todos(){
       return this.$store.getters.todoList;
+    },
+    todosLength(){
+      return this.$store.getters.todoLength;
     }
   },
   methods: {
@@ -87,72 +93,80 @@ export default {
   margin-bottom: 10px;
   display: flex;
   align-items: center;
-}
-.todo .todo__state.state{
-  margin: 0 10px 0 0;
-  position: relative;
-}
-.todo .todo__state.state .state__input,
-.todo .todo__state.state .state__overlay{
-  height: 1.6rem;
-  width: 1.6rem;
-  margin: 0;
-}
-.todo .todo__state.state .state__input{
-  opacity: 0;
-  position: absolute;
-  z-index: 10;
-}
-.todo .todo__state.state .state__overlay{
-  border: 1px solid #e0e0e0;
-  position: relative;
-  z-index: 0;
-  transition: opacity .2s;
-}
-.todo .todo__state.state .state__overlay::before,
-.todo .todo__state.state .state__overlay::after{
-  display: block;
-  opacity: 0;
-  position: absolute;
-  content: "";
-  background: #000;
-  transform: rotate(45deg);
-}
-.todo .todo__state.state .state__overlay::before{
-  height: 14px;
-    width: 1px;
-    left: 9px;
-    top: 2px;
-}
-.todo .todo__state.state .state__overlay::after{
-  width: 8px;
-    height: 1px;
-    top: 11px;
-    left: -2px;
-}
-.todo .todo__state.state .state__input:checked ~ .state__overlay{
-  border-color: transparent;
-  transition: none;
-}
-.todo .todo__state.state .state__input:checked ~ .state__overlay::before,
-.todo .todo__state.state .state__input:checked ~ .state__overlay::after{
-  transition: opacity .2s;
-  opacity: 1;
-}
-.todo .todo__text{
-  flex: 1;
-  transition: opacity .2s;
-}
-.todo .todo__text.todo__text--done{
-  opacity: .2;
-}
-.todo .todo__action{
-  display: block;
-  font-size: 0;
-  margin: 0 0 0 10px;
-}
-.todo .todo__action svg{
-  height: 1.6rem;
-  width: 1.6rem;
+
+  &__state{
+    margin: 0 10px 0 0;
+    position: relative;
+
+    .state{
+      &__input,
+      &__overlay{
+        height: 1.6rem;
+        width: 1.6rem;
+        margin: 0;
+      }
+      &__input{
+        opacity: 0;
+        position: absolute;
+        z-index: 10;
+
+        &:checked ~ .state__overlay{
+          border-color: transparent;
+          transition: none;
+        }
+        &:checked ~ .state__overlay::before,
+        &:checked ~ .state__overlay::after{
+          transition: opacity .2s;
+          opacity: 1;
+        }
+      }
+      &__overlay{
+        border: 1px solid #e0e0e0;
+        position: relative;
+        z-index: 0;
+        transition: opacity .2s;
+
+        &::before,
+        &::after{
+          display: block;
+          opacity: 0;
+          position: absolute;
+          content: "";
+          background: #000;
+          transform: rotate(45deg);
+        }
+        &::before{
+          height: 14px;
+          width: 1px;
+          left: 9px;
+          top: 2px;
+        }
+        &::after{
+          width: 8px;
+          height: 1px;
+          top: 11px;
+          left: -2px;
+        }
+      }
+    }
+  }
+  &__text{
+    flex: 1;
+    transition: opacity .2s;
+
+    &--done{
+      opacity: .2;
+    }
+  }
+  &__action{
+    display: block;
+    font-size: 0;
+    margin: 0 0 0 10px;
+
+    svg{
+      height: 1.6rem;
+      width: 1.6rem;
+    }
+  }
 }
 </style>
