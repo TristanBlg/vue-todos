@@ -1,22 +1,25 @@
 <template>
   <div>
-    <h1 class="title">TOTAL TODOS : {{ todolistLength }}</h1>
+    <h1 class="title">TOTAL TODOS : {{ todosLength }}</h1>
 	  <Todos />
+	  <FormTodo />
   </div>
 </template>
 
 <script>
 import Todos from '@/components/Todos.vue';
+import FormTodo from '@/components/FormTodo.vue';
 
 export default {
   name: 'TodoList',
   components: {
     Todos,
+    FormTodo
   },
   computed: {
-  	todolistLength(){
-  		return this.$store.state.todos.length
-  	}
+    todosLength(){
+      return this.$store.getters.todoLength;
+    }
   }
 };
 </script>
@@ -36,5 +39,27 @@ export default {
 		margin-bottom: 10px;
 		display: flex;
 		align-items: center;
+	}
+	.form{
+	  margin: 0;
+	}
+	.form .form__input{
+	  width: 100%;
+	  padding: 10px;
+	  display: block;
+	  border: none;
+	  margin: 0;
+	  font-size: 1.4rem;
+	}
+	.form .form__input.form__input--text{
+	  margin-bottom: 10px;
+	  border: 1px solid #e0e0e0;
+	}
+	.form .form__input.form__input--submit{
+	  color: #fff;
+	  font-weight: 600;
+	  text-transform: uppercase;
+	  cursor: pointer;
+	  background-color: #36495d;
 	}
 </style>

@@ -6,12 +6,12 @@
         <div class="state__overlay"></div>
       </div>
       <label v-bind:for="'todo_'+index" class="todo__text" v-bind:class="{'todo__text--done': todo.done}">{{ todo.name }}</label>
-      <a class="todo__action todo__action--edit" href="">
+      <a class="todo__action todo__action--edit" v-on:click.prevent="editTodo(index)" href="">
         <svg>
           <use xlink:href="#edit" x="0" y="0" />
         </svg>
       </a>
-      <a class="todo__action todo__action--delete" href="">
+      <a class="todo__action todo__action--delete" v-on:click.prevent="deleteTodo(index)" href="">
         <svg>
           <use xlink:href="#delete" x="0" y="0" />
         </svg>
@@ -68,7 +68,15 @@ export default {
   name: 'Todos',
   computed: {
     todos(){
-      return this.$store.state.todos
+      return this.$store.getters.todoList;
+    }
+  },
+  methods: {
+    editTodo(key){
+      return this.$store.commit('editTodo', {key: key});
+    },
+    deleteTodo(key){
+      confirm("Êtes-vous sûr de vouloir suprimer cette todo ?") ? this.$store.commit('deleteTodo', {key: key}) : "";
     }
   }
 };
