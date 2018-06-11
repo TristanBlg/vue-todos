@@ -79,7 +79,7 @@ export default {
   },
   methods: {
     editTodo(key){
-      return this.$store.commit('editTodo', {key: key});
+      this.$store.commit('editTodo', {key: key});
     },
     deleteTodo(key){
       confirm("Êtes-vous sûr de vouloir suprimer cette todo ?") ? this.$store.commit('deleteTodo', {key: key}) : "";
